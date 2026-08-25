@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fffaf0" />
+    <meta name="description" content="A playful animal breed and species learning game for children in Years 1–2." />
+    <title>Paws & Feathers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="brand" id="brandButton" aria-label="Go to game home">
+          <span class="brand-mark" aria-hidden="true">🐾</span>
+          <span><strong>Paws &amp; Feathers</strong><small>Animal Discovery Adventure</small></span>
+        </button>
+
+        <div class="top-actions">
+          <div class="mini-stat" title="Your best score">
+            <span aria-hidden="true">🏆</span>
+            <span><small>BEST</small><strong id="bestScore">0</strong></span>
+          </div>
+          <button class="icon-button" id="soundButton" aria-label="Turn sound off" aria-pressed="true">
+            <span class="sound-on" aria-hidden="true">🔊</span>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="homeView">
+          <div class="hero-copy">
+            <span class="eyebrow"><i></i> LITTLE EXPLORERS CLUB</span>
+            <h1>Meet them.<br /><em>Know them.</em> Love them!</h1>
+            <p>Can you tell a Beagle from a Border Collie—or an Orca from a Blue Whale? Follow the clues and become an animal expert!</p>
+            <div class="hero-actions">
+              <button class="primary-button" id="startButton">Start an adventure <span>→</span></button>
+              <button class="text-button" id="learnButton"><span>▦</span> Explore animal cards</button>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Illustrations of a dog, cat, bird and fish">
+            <div class="sun-orbit"></div>
+            <div class="animal-bubble bubble-dog"><span>🐶</span></div>
+            <div class="animal-bubble bubble-cat"><span>🐱</span></div>
+            <div class="animal-bubble bubble-bird"><span>🐦</span></div>
+            <div class="animal-bubble bubble-fish"><span>🐠</span></div>
+            <div class="sparkle s1">✦</div><div class="sparkle s2">✦</div><div class="sparkle s3">●</div>
+          </div>
+        </section>
+
+        <section class="choose-section" id="chooseSection" aria-labelledby="chooseTitle">
+          <div class="section-heading">
+            <div><span class="eyebrow"><i></i> PICK A PATH</span><h2 id="chooseTitle">Who will we meet today?</h2></div>
+            <p>Each trail has 5 quick questions.</p>
+          </div>
+          <div class="category-grid" id="categoryGrid"></div>
+        </section>
+
+        <section class="game-view hidden" id="gameView" aria-live="polite">
+          <div class="game-topline">
+            <button class="back-button" id="backButton">← <span>Choose a trail</span></button>
+            <div class="round-progress">
+              <span id="roundLabel">Question 1 of 5</span>
+              <div class="progress-track"><div id="progressFill"></div></div>
+            </div>
+            <div class="score-pill"><span>⭐</span><strong id="scoreDisplay">0</strong></div>
+          </div>
+
+          <div class="game-layout">
+            <article class="quiz-card">
+              <div class="question-heading">
+                <span class="category-tag" id="categoryTag">DOG TRAIL</span>
+                <h2>Who am I?</h2>
+                <button class="speak-button" id="speakButton" aria-label="Read the question aloud">🔈 <span>Read to me</span></button>
+              </div>
+              <div class="portrait-stage" id="portraitStage"></div>
+              <div class="clue-card"><span>💡</span><p><strong>Explorer clue</strong><span id="clueText"></span></p></div>
+            </article>
+
+            <aside class="answer-panel">
+              <span class="answer-kicker">CHOOSE ONE</span>
+              <div class="answer-list" id="answerList"></div>
+              <button class="hint-button" id="hintButton"><span>✨</span> Give me a hint</button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="learn-view hidden" id="learnView">
+          <div class="learn-header">
+            <button class="back-button" id="learnBackButton">← <span>Back home</span></button>
+            <div><span class="eyebrow"><i></i> ANIMAL BOOK</span><h2>Meet the animal families</h2><p>Tap a card to discover a quick fact.</p></div>
+          </div>
+          <div class="filter-row" id="filterRow"></div>
+          <div class="breed-grid" id="breedGrid"></div>
+        </section>
+
+        <section class="results-view hidden" id="resultsView">
+          <div class="results-card">
+            <div class="badge-burst"><span id="resultEmoji">🏅</span></div>
+            <span class="eyebrow"><i></i> TRAIL COMPLETE</span>
+            <h2 id="resultTitle">Brilliant exploring!</h2>
+            <p id="resultCopy"></p>
+            <div class="result-score"><strong id="finalScore">0</strong><span>points</span></div>
+            <div class="stars" id="resultStars" aria-label="Result stars">☆ ☆ ☆</div>
+            <div class="result-actions">
+              <button class="primary-button" id="playAgainButton">Play this trail again <span>↻</span></button>
+              <button class="text-button" id="newTrailButton">Choose a new trail</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer><span>Made for curious kids in Years 1–2</span><span>Learn kindly • Play bravely • <a href="https://commons.wikimedia.org/" target="_blank" rel="noreferrer">Photos from Wikimedia Commons</a></span></footer>
+    </div>
+
+    <div class="fact-modal hidden" id="factModal" role="dialog" aria-modal="true" aria-labelledby="factTitle">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card">
+        <button class="modal-close" data-close-modal aria-label="Close">×</button>
+        <div id="factPortrait"></div>
+        <span class="category-tag" id="factCategory"></span>
+        <h2 id="factTitle"></h2>
+        <p id="factText"></p>
+        <div class="source-links">
+          <a class="photo-source" id="factSource" href="#" target="_blank" rel="noreferrer">Photo source &amp; licence ↗</a>
+          <a class="info-source hidden" id="factInfoSource" href="#" target="_blank" rel="noreferrer">Bird facts: Australia’s Wonderful Birds ↗</a>
+        </div>
+        <button class="primary-button compact" data-close-modal>Got it!</button>
+      </div>
+    </div>
+
+    <div class="toast hidden" id="toast" role="status"></div>
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
